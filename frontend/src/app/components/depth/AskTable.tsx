@@ -17,8 +17,11 @@ export const AskTable = ({ asks }: { asks: [string, string][] }) => {
 
   const asksWithTotal: [string, string, number][] = [];
   for (let i = relevantAsks.length - 1; i >= 0; i--) {
-    const [price, quantity] = relevantAsks[i];
-    asksWithTotal.push([price, quantity, (currentTotal += Number(quantity))]);
+    const ask = relevantAsks[i];
+    if (ask) {
+      const [price, quantity] = ask;
+      asksWithTotal.push([price, quantity, (currentTotal += Number(quantity))]);
+    }
   }
   const maxTotal = relevantAsks.reduce(
     (acc, [_, quantity]) => acc + Number(quantity),
@@ -43,10 +46,10 @@ export const AskTable = ({ asks }: { asks: [string, string][] }) => {
 
   return (
     <div>
-      {asksWithTotal.map(([price, quantity, total]) => (
+      {asksWithTotal.map(([price, quantity, total], index) => (
         <Ask
           maxTotal={maxTotal}
-          key={price}
+          key={index}
           price={price}
           quantity={quantity}
           total={total}
