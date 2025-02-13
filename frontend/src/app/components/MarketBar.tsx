@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Ticker } from "../utils/types";
+import { type Ticker } from "../utils/types";
 import { getTicker } from "../utils/httpClient";
+import Image from "next/image";
 
 export const MarketBar = ({ market }: { market: string }) => {
   const [ticker, setTicker] = useState<Ticker | null>(null);
 
   useEffect(() => {
-    getTicker(market).then(setTicker);
+    getTicker(market).then(setTicker).catch(console.error);
   }, [market]);
 
   return (
@@ -71,21 +72,25 @@ function Ticker({ market }: { market: string }) {
   return (
     <div className="flex h-[60px] shrink-0 space-x-4">
       <div className="relative -mr-4 ml-2 flex flex-row">
-        <img
+        <Image
           alt="SOL Logo"
           loading="lazy"
           decoding="async"
           data-nimg="1"
           className="outline-baseBackgroundL1 z-10 mt-4 h-6 w-6 rounded-full"
           src="/sol.webp"
+          width={24}
+          height={24}
         />
-        <img
+        <Image
           alt="USDC Logo"
           loading="lazy"
           decoding="async"
           data-nimg="1"
           className="-ml-2 mt-4 h-6 w-6 rounded-full"
           src="/usdc.webp"
+          width={24}
+          height={24}
         />
       </div>
       <button type="button" className="react-aria-Button" data-rac="">

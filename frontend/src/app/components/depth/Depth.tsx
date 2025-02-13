@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getTicker } from "../../utils/httpClient";
+import { getDepth, getTicker } from "../../utils/httpClient";
 import { BidTable } from "./BidTable";
 import { AskTable } from "./AskTable";
 import { SignalingManager } from "@/app/utils/SignalingManager";
@@ -63,18 +63,20 @@ export function Depth({ market }: { market: string }) {
       .catch((error) => {
         console.error("Failed to register depth callback:", error);
       });
+
     SignalingManager.getInstance().sendMessage({
       method: "SUBSCRIBE",
       params: [`depth.200ms.${market}`],
     });
-    // getDepth(market)
-    //   .then((d) => {
-    //     setBids(d.bids.reverse());
-    //     setAsks(d.asks);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Failed to fetch depth data:", error);
-    //   });
+
+    getDepth(market)
+      .then((d) => {
+        setBids(d.bids.reverse());
+        setAsks(d.asks);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch depth data:", error);
+      });
 
     getTicker(market)
       .then((t) => setPrice(t.lastPrice))
