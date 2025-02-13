@@ -34,11 +34,15 @@ export default function Page() {
           </div>
           <div className="w-[1px] flex-col border-l border-slate-800"></div>
           <div className="flex w-[250px] flex-col overflow-hidden">
-            <div className="grid grid-cols-2 gap-1">
+            <div className="grid grid-cols-2 bg-slate-800">
               {BookAndTradesTabs.map((item) => (
                 <button
                   key={item.label}
-                  className="flex"
+                  className={`${
+                    showDepthORTrades === item.label
+                      ? "bg-slate-900 text-white"
+                      : "bg-slate-800 text-slate-500"
+                  } `}
                   onClick={() => setShowDepthORTrades(item.label)}
                 >
                   {item.label}

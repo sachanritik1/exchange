@@ -25,7 +25,10 @@ const Trades = ({ market }: { market: string }) => {
         <div className="text-slate-500">Time</div>
       </div>
       {trades.map((trade) => (
-        <div key={trade.id} className="flex justify-between text-xs">
+        <div
+          key={trade.id}
+          className="flex justify-between overflow-y-auto text-xs"
+        >
           <div className="text-slate-500">{trade.price}</div>
           <div className="text-slate-500">{trade.quantity}</div>
           <div className="text-slate-500">
