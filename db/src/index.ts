@@ -3,10 +3,10 @@ import { createClient } from "redis";
 import { DbMessage } from "./types";
 
 const pgClient = new Client({
-  user: "yourusername",
+  user: "your_user",
   host: "localhost",
-  database: "yourdatabase",
-  password: "yourpassword",
+  database: "my_database",
+  password: "your_password",
   port: 5432,
 });
 pgClient.connect();
