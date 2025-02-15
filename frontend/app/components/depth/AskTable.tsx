@@ -23,9 +23,9 @@ export const AskTable = ({ asks }: { asks: [string, string][] }) => {
         <Ask
           maxTotal={maxTotal}
           key={price}
-          price={price}
-          quantity={quantity}
-          total={total}
+          price={price as string}
+          quantity={quantity as string}
+          total={total as number}
         />
       ))}
     </div>
