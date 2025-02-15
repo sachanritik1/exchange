@@ -44,6 +44,7 @@ export function SwapUI({ market }: { market: string }) {
                     className="h-12 rounded-lg border-2 border-solid border-baseBorderLight bg-[var(--background)] pr-12 text-right text-2xl leading-9 text-[$text] placeholder-baseTextMedEmphasis ring-0 transition focus:border-accentBlue focus:ring-0"
                     type="text"
                     value="134.38"
+                    readOnly
                   />
                   <div className="flex flex-row absolute right-1 top-1 p-2">
                     <div className="relative">
@@ -70,6 +71,7 @@ export function SwapUI({ market }: { market: string }) {
                   className="h-12 rounded-lg border-2 border-solid border-baseBorderLight bg-[var(--background)] pr-12 text-right text-2xl leading-9 text-[$text] placeholder-baseTextMedEmphasis ring-0 transition focus:border-accentBlue focus:ring-0"
                   type="text"
                   value="123"
+                  readOnly
                 />
                 <div className="flex flex-row absolute right-1 top-1 p-2">
                   <div className="relative">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getDepth, getTicker, getTrades } from "../../utils/httpClient";
+import { getDepth, getTicker } from "../../utils/httpClient";
 import { BidTable } from "./BidTable";
 import { AskTable } from "./AskTable";
 import { SignalingManager } from "../../utils/SignalingManager";
@@ -66,7 +66,6 @@ export function Depth({ market }: { market: string }) {
     });
 
     getTicker(market).then((t) => setPrice(t.lastPrice));
-    getTrades(market).then((t) => setPrice(t[0].price));
 
     return () => {
       SignalingManager.getInstance().sendMessage({
