@@ -62,7 +62,7 @@ export class Engine {
       orderbooks: this.orderbooks.map((o) => o.getSnapshot()),
       balances: Array.from(this.balances.entries()),
     };
-    fs.writeFileSync("./snapshot.json", JSON.stringify(snapshotSnapshot));
+    // fs.writeFileSync("./snapshot.json", JSON.stringify(snapshotSnapshot));
   }
 
   process({
@@ -395,22 +395,28 @@ export class Engine {
         // Update quote asset balance
         //@ts-ignore
         this.balances.get(fill.otherUserId)[quoteAsset].available =
+          //@ts-ignore
           this.balances.get(fill.otherUserId)?.[quoteAsset].available +
+          //@ts-ignore
           fill.qty * fill.price;
 
         //@ts-ignore
         this.balances.get(userId)[quoteAsset].locked =
+          //@ts-ignore
           this.balances.get(userId)?.[quoteAsset].locked -
+          //@ts-ignore
           fill.qty * fill.price;
 
         // Update base asset balance
 
         //@ts-ignore
         this.balances.get(fill.otherUserId)[baseAsset].locked =
+          //@ts-ignore
           this.balances.get(fill.otherUserId)?.[baseAsset].locked - fill.qty;
 
         //@ts-ignore
         this.balances.get(userId)[baseAsset].available =
+          //@ts-ignore
           this.balances.get(userId)?.[baseAsset].available + fill.qty;
       });
     } else {
@@ -418,22 +424,28 @@ export class Engine {
         // Update quote asset balance
         //@ts-ignore
         this.balances.get(fill.otherUserId)[quoteAsset].locked =
+          //@ts-ignore
           this.balances.get(fill.otherUserId)?.[quoteAsset].locked -
+          //@ts-ignore
           fill.qty * fill.price;
 
         //@ts-ignore
         this.balances.get(userId)[quoteAsset].available =
+          //@ts-ignore
           this.balances.get(userId)?.[quoteAsset].available +
+          //@ts-ignore
           fill.qty * fill.price;
 
         // Update base asset balance
 
         //@ts-ignore
         this.balances.get(fill.otherUserId)[baseAsset].available =
+          //@ts-ignore
           this.balances.get(fill.otherUserId)?.[baseAsset].available + fill.qty;
 
         //@ts-ignore
         this.balances.get(userId)[baseAsset].locked =
+          //@ts-ignore
           this.balances.get(userId)?.[baseAsset].locked - fill.qty;
       });
     }
@@ -457,11 +469,13 @@ export class Engine {
       }
       //@ts-ignore
       this.balances.get(userId)[quoteAsset].available =
+        //@ts-ignore
         this.balances.get(userId)?.[quoteAsset].available -
         Number(quantity) * Number(price);
 
       //@ts-ignore
       this.balances.get(userId)[quoteAsset].locked =
+        //@ts-ignore
         this.balances.get(userId)?.[quoteAsset].locked +
         Number(quantity) * Number(price);
     } else {
@@ -473,10 +487,12 @@ export class Engine {
       }
       //@ts-ignore
       this.balances.get(userId)[baseAsset].available =
+        //@ts-ignore
         this.balances.get(userId)?.[baseAsset].available - Number(quantity);
 
       //@ts-ignore
       this.balances.get(userId)[baseAsset].locked =
+        //@ts-ignore
         this.balances.get(userId)?.[baseAsset].locked + Number(quantity);
     }
   }
