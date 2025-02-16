@@ -20,9 +20,9 @@ export default function Page() {
     BookAndTradesTabs[0]?.label
   );
 
-  const ActiveComponent = BookAndTradesTabs.find(
+  const ActiveComponentLabel = BookAndTradesTabs.find(
     (item) => item.label === showDepthORTrades
-  )?.component;
+  )?.label;
 
   return (
     <div className="flex flex-1 flex-row">
@@ -49,7 +49,24 @@ export default function Page() {
                 </button>
               ))}
             </div>
-            {ActiveComponent && <ActiveComponent market={market as string} />}
+            <div
+              style={
+                ActiveComponentLabel === "Depth"
+                  ? { display: "block" }
+                  : { display: "none" }
+              }
+            >
+              <Depth market={market as string} />
+            </div>
+            <div
+              style={
+                ActiveComponentLabel === "Trades"
+                  ? { display: "block" }
+                  : { display: "none" }
+              }
+            >
+              <Trades market={market as string} />
+            </div>
           </div>
         </div>
       </div>

@@ -315,6 +315,7 @@ export class Engine {
           p: fill.price,
           q: fill.qty.toString(),
           s: market,
+          timestamp: Date.now(),
         },
       });
     });
