@@ -63,7 +63,7 @@ function Ask({
           transition: "width 0.3s ease-in-out",
         }}
       ></div>
-      <div className="flex justify-between text-xs w-full">
+      <div className="grid grid-cols-3 text-xs w-full">
         <div>{price}</div>
         <div>{quantity}</div>
         <div>{total?.toFixed(2)}</div>

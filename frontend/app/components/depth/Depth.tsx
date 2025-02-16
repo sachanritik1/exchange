@@ -91,7 +91,7 @@ export function Depth({ market }: { market: string }) {
 
 function TableHeader() {
   return (
-    <div className="flex justify-between text-xs">
+    <div className="grid grid-cols-3 text-xs">
       <div className="text-white">Price</div>
       <div className="text-slate-500">Size</div>
       <div className="text-slate-500">Total</div>
