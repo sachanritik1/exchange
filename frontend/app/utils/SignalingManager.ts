@@ -37,36 +37,38 @@ export class SignalingManager {
       const message = JSON.parse(event.data);
       const type = message.data.e;
       if (this.callbacks[type]) {
-        this.callbacks[type].forEach(({ callback }) => {
-          if (type === "ticker") {
-            const newTicker: Partial<Ticker> = {
-              lastPrice: message.data.c,
-              high: message.data.h,
-              low: message.data.l,
-              volume: message.data.v,
-              quoteVolume: message.data.V,
-              symbol: message.data.s,
-            };
-            console.log(newTicker);
-            callback(newTicker);
-          }
-          if (type === "depth") {
-            const updatedBids = message.data.b;
-            const updatedAsks = message.data.a;
-            callback({ bids: updatedBids, asks: updatedAsks });
-          }
+        this.callbacks[type].forEach(
+          ({ callback }: { callback: (args: any) => any }) => {
+            if (type === "ticker") {
+              const newTicker: Partial<Ticker> = {
+                lastPrice: message.data.c,
+                high: message.data.h,
+                low: message.data.l,
+                volume: message.data.v,
+                quoteVolume: message.data.V,
+                symbol: message.data.s,
+              };
+              console.log(newTicker);
+              callback(newTicker);
+            }
+            if (type === "depth") {
+              const updatedBids = message.data.b;
+              const updatedAsks = message.data.a;
+              callback({ bids: updatedBids, asks: updatedAsks });
+            }
 
-          if (type === "trade") {
-            const newTrade: Partial<Trade> = {
-              id: message.data.t,
-              isBuyerMaker: message.data.m,
-              price: message.data.p,
-              quantity: message.data.q,
-              timestamp: message.data.timestamp,
-            };
-            callback(newTrade);
+            if (type === "trade") {
+              const newTrade: Partial<Trade> = {
+                id: message.data.t,
+                isBuyerMaker: message.data.m,
+                price: message.data.p,
+                quantity: message.data.q,
+                timestamp: message.data.timestamp,
+              };
+              callback(newTrade);
+            }
           }
-        });
+        );
       }
     };
   }
@@ -92,7 +94,7 @@ export class SignalingManager {
   async deRegisterCallback(type: string, id: string) {
     if (this.callbacks[type]) {
       const index = this.callbacks[type].findIndex(
-        (callback) => callback.id === id
+        (callback: { id: string; [key: string]: any }) => callback.id === id
       );
       if (index !== -1) {
         this.callbacks[type].splice(index, 1);
