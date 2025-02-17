@@ -20,39 +20,39 @@ export function Depth({ market }: { market: string }) {
 
         setBids((prev) => {
           const bidsNotPresentInPrev = data.bids.filter(
-            ([price, _]) => !prev.some(([prevPrice, _]) => prevPrice === price)
+            ([price, _]) => !prev.some(([prevPrice, _]) => prevPrice === price),
           );
           const updatedBids = prev
             .map(([prevPrice, prevQuantity]) => {
               const updatedQuantity = data.bids.find(
-                ([price, _]) => price === prevPrice
+                ([price, _]) => price === prevPrice,
               )?.[1];
               return [prevPrice, updatedQuantity ?? prevQuantity];
             })
             .filter(([, quantity]) => quantity !== "0.00");
           return [...updatedBids, ...bidsNotPresentInPrev].sort(
-            (a, b) => Number(b[0]) - Number(a[0])
+            (a, b) => Number(b[0]) - Number(a[0]),
           ) as [string, string][];
         });
 
         setAsks((prev) => {
           const asksNotPresentInPrev = data.asks.filter(
-            ([price, _]) => !prev.some(([prevPrice, _]) => prevPrice === price)
+            ([price, _]) => !prev.some(([prevPrice, _]) => prevPrice === price),
           );
           const updatedAsks = prev
             .map(([prevPrice, prevQuantity]) => {
               const updatedQuantity = data.asks.find(
-                ([price, _]) => price === prevPrice
+                ([price, _]) => price === prevPrice,
               )?.[1];
               return [prevPrice, updatedQuantity ?? prevQuantity];
             })
             .filter(([, quantity]) => quantity !== "0.00");
           return [...updatedAsks, ...asksNotPresentInPrev].sort(
-            (a, b) => Number(b[0]) - Number(a[0])
+            (a, b) => Number(b[0]) - Number(a[0]),
           ) as [string, string][];
         });
       },
-      `DEPTH-${market}`
+      `DEPTH-${market}`,
     );
 
     SignalingManager.getInstance().sendMessage({
@@ -74,7 +74,7 @@ export function Depth({ market }: { market: string }) {
       });
       SignalingManager.getInstance().deRegisterCallback(
         "depth",
-        `DEPTH-${market}`
+        `DEPTH-${market}`,
       );
     };
   }, [market]);

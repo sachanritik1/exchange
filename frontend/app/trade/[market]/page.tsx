@@ -17,11 +17,11 @@ export default function Page() {
   const { market } = useParams();
 
   const [showDepthORTrades, setShowDepthORTrades] = useState(
-    BookAndTradesTabs[0]?.label
+    BookAndTradesTabs[0]?.label,
   );
 
   const ActiveComponentLabel = BookAndTradesTabs.find(
-    (item) => item.label === showDepthORTrades
+    (item) => item.label === showDepthORTrades,
   )?.label;
 
   return (

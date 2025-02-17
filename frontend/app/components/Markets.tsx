@@ -14,14 +14,12 @@ export const Markets = () => {
   }, []);
 
   return (
-    <div className="flex flex-col flex-1 max-w-[1280px] w-full">
-      <div className="flex flex-col min-w-[700px] flex-1 w-full">
-        <div className="flex flex-col w-full rounded-lg bg-baseBackgroundL1 px-5 py-3">
+    <div className="flex w-full max-w-[1280px] flex-1 flex-col">
+      <div className="flex w-full min-w-[700px] flex-1 flex-col">
+        <div className="flex w-full flex-col rounded-lg bg-baseBackgroundL1 px-5 py-3">
           <table className="w-full table-auto">
             <MarketHeader />
-            {tickers?.map((m, index) => (
-              <MarketRow market={m} key={index} />
-            ))}
+            {tickers?.map((m, index) => <MarketRow market={m} key={index} />)}
           </table>
         </div>
       </div>
@@ -33,12 +31,12 @@ function MarketRow({ market }: { market: Ticker }) {
   const router = useRouter();
   return (
     <tr
-      className="cursor-pointer border-t border-baseBorderLight hover:bg-white/7 w-full"
+      className="hover:bg-white/7 w-full cursor-pointer border-t border-baseBorderLight"
       onClick={() => router.push(`/trade/${market.symbol}`)}
     >
       <td className="px-1 py-3">
         <div className="flex shrink">
-          <div className="flex items-center undefined">
+          <div className="undefined flex items-center">
             <div
               className="relative flex-none overflow-hidden rounded-full border border-baseBorderMed"
               style={{ width: "40px", height: "40px" }}
@@ -59,11 +57,11 @@ function MarketRow({ market }: { market: Ticker }) {
               </div>
             </div>
             <div className="ml-4 flex flex-col">
-              <p className="whitespace-nowrap text-base font-medium text-baseTextHighEmphasis">
+              <p className="text-base text-baseTextHighEmphasis whitespace-nowrap font-medium">
                 {market.symbol}
               </p>
-              <div className="flex items-center justify-start flex-row gap-2">
-                <p className="flex-medium text-left text-xs leading-5 text-baseTextMedEmphasis">
+              <div className="flex flex-row items-center justify-start gap-2">
+                <p className="flex-medium text-baseTextMedEmphasis text-left text-xs leading-5">
                   {market.symbol}
                 </p>
               </div>
@@ -81,7 +79,7 @@ function MarketRow({ market }: { market: Ticker }) {
         <p className="text-base font-medium tabular-nums">{market.volume}</p>
       </td>
       <td className="px-1 py-3">
-        <p className="text-base font-medium tabular-nums text-greenText">
+        <p className="text-base text-greenText font-medium tabular-nums">
           {Number(market.priceChangePercent)?.toFixed(3)} %
         </p>
       </td>
@@ -93,23 +91,23 @@ function MarketHeader() {
   return (
     <thead>
       <tr className="">
-        <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
-          <div className="flex items-center gap-1 cursor-pointer select-none">
+        <th className="text-baseTextMedEmphasis px-2 py-3 text-left text-sm font-normal">
+          <div className="flex cursor-pointer select-none items-center gap-1">
             Name<span className="w-[16px]"></span>
           </div>
         </th>
-        <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
-          <div className="flex items-center gap-1 cursor-pointer select-none">
+        <th className="text-baseTextMedEmphasis px-2 py-3 text-left text-sm font-normal">
+          <div className="flex cursor-pointer select-none items-center gap-1">
             Price<span className="w-[16px]"></span>
           </div>
         </th>
-        <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
-          <div className="flex items-center gap-1 cursor-pointer select-none">
+        <th className="text-baseTextMedEmphasis px-2 py-3 text-left text-sm font-normal">
+          <div className="flex cursor-pointer select-none items-center gap-1">
             Market Cap<span className="w-[16px]"></span>
           </div>
         </th>
-        <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
-          <div className="flex items-center gap-1 cursor-pointer select-none">
+        <th className="text-baseTextMedEmphasis px-2 py-3 text-left text-sm font-normal">
+          <div className="flex cursor-pointer select-none items-center gap-1">
             24h Volume
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -128,8 +126,8 @@ function MarketHeader() {
             </svg>
           </div>
         </th>
-        <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
-          <div className="flex items-center gap-1 cursor-pointer select-none">
+        <th className="text-baseTextMedEmphasis px-2 py-3 text-left text-sm font-normal">
+          <div className="flex cursor-pointer select-none items-center gap-1">
             24h Change<span className="w-[16px]"></span>
           </div>
         </th>

@@ -2,11 +2,15 @@ export const BidTable = ({ bids }: { bids: [string, string][] }) => {
   let currentTotal = 0;
   const relevantBids = bids.slice(0, 15);
   const bidsWithTotal: [string, string, number][] = relevantBids.map(
-    ([price, quantity]) => [price, quantity, (currentTotal += Number(quantity))]
+    ([price, quantity]) => [
+      price,
+      quantity,
+      (currentTotal += Number(quantity)),
+    ],
   );
   const maxTotal = relevantBids.reduce(
     (acc, [_, quantity]) => acc + Number(quantity),
-    0
+    0,
   );
 
   return (
@@ -56,7 +60,7 @@ function Bid({
           transition: "width 0.3s ease-in-out",
         }}
       ></div>
-      <div className="grid grid-cols-3 text-xs w-full">
+      <div className="grid w-full grid-cols-3 text-xs">
         <div>{price}</div>
         <div>{quantity}</div>
         <div>{total.toFixed(2)}</div>

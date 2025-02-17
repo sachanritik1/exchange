@@ -17,7 +17,7 @@ const Trades = ({ market }: { market: string }) => {
           return [trade, ...prevTrades];
         });
       },
-      `TRADE-${market}`
+      `TRADE-${market}`,
     );
 
     SignalingManager.getInstance().sendMessage({
@@ -40,7 +40,7 @@ const Trades = ({ market }: { market: string }) => {
       });
       SignalingManager.getInstance().deRegisterCallback(
         "trade",
-        `TRADE-${market}`
+        `TRADE-${market}`,
       );
     };
   }, [market]);
