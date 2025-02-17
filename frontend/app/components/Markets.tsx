@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Ticker } from "../utils/types";
 import { getTickers } from "../utils/httpClient";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export const Markets = () => {
   const [tickers, setTickers] = useState<Ticker[]>();
@@ -18,7 +19,9 @@ export const Markets = () => {
         <div className="flex flex-col w-full rounded-lg bg-baseBackgroundL1 px-5 py-3">
           <table className="w-full table-auto">
             <MarketHeader />
-            {tickers?.map((m) => <MarketRow market={m} />)}
+            {tickers?.map((m, index) => (
+              <MarketRow market={m} key={index} />
+            ))}
           </table>
         </div>
       </div>
@@ -29,7 +32,10 @@ export const Markets = () => {
 function MarketRow({ market }: { market: Ticker }) {
   const router = useRouter();
   return (
-    <tr className="cursor-pointer border-t border-baseBorderLight hover:bg-white/7 w-full" onClick={() => router.push(`/trade/${market.symbol}`)}>
+    <tr
+      className="cursor-pointer border-t border-baseBorderLight hover:bg-white/7 w-full"
+      onClick={() => router.push(`/trade/${market.symbol}`)}
+    >
       <td className="px-1 py-3">
         <div className="flex shrink">
           <div className="flex items-center undefined">
@@ -38,9 +44,11 @@ function MarketRow({ market }: { market: Ticker }) {
               style={{ width: "40px", height: "40px" }}
             >
               <div className="relative">
-                <img
+                <Image
                   alt={market.symbol}
-                  src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVvBqZC_Q1TSYObZaMvK0DRFeHZDUtVMh08Q&s"}
+                  src={
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVvBqZC_Q1TSYObZaMvK0DRFeHZDUtVMh08Q&s"
+                  }
                   loading="lazy"
                   width="40"
                   height="40"
@@ -76,56 +84,56 @@ function MarketRow({ market }: { market: Ticker }) {
         <p className="text-base font-medium tabular-nums text-greenText">
           {Number(market.priceChangePercent)?.toFixed(3)} %
         </p>
-      </td> 
+      </td>
     </tr>
   );
 }
 
 function MarketHeader() {
   return (
-      <thead>
-        <tr className="">
-          <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
-            <div className="flex items-center gap-1 cursor-pointer select-none">
-              Name<span className="w-[16px]"></span>
-            </div>
-          </th>
-          <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
-            <div className="flex items-center gap-1 cursor-pointer select-none">
-              Price<span className="w-[16px]"></span>
-            </div>
-          </th>
-          <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
-            <div className="flex items-center gap-1 cursor-pointer select-none">
-              Market Cap<span className="w-[16px]"></span>
-            </div>
-          </th>
-          <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
-            <div className="flex items-center gap-1 cursor-pointer select-none">
-              24h Volume
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                className="lucide lucide-arrow-down h-4 w-4"
-              >
-                <path d="M12 5v14"></path>
-                <path d="m19 12-7 7-7-7"></path>
-              </svg>
-            </div>
-          </th>
-          <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
-            <div className="flex items-center gap-1 cursor-pointer select-none">
-              24h Change<span className="w-[16px]"></span>
-            </div>
-          </th>
-        </tr>
-      </thead>
+    <thead>
+      <tr className="">
+        <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
+          <div className="flex items-center gap-1 cursor-pointer select-none">
+            Name<span className="w-[16px]"></span>
+          </div>
+        </th>
+        <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
+          <div className="flex items-center gap-1 cursor-pointer select-none">
+            Price<span className="w-[16px]"></span>
+          </div>
+        </th>
+        <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
+          <div className="flex items-center gap-1 cursor-pointer select-none">
+            Market Cap<span className="w-[16px]"></span>
+          </div>
+        </th>
+        <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
+          <div className="flex items-center gap-1 cursor-pointer select-none">
+            24h Volume
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              className="lucide lucide-arrow-down h-4 w-4"
+            >
+              <path d="M12 5v14"></path>
+              <path d="m19 12-7 7-7-7"></path>
+            </svg>
+          </div>
+        </th>
+        <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
+          <div className="flex items-center gap-1 cursor-pointer select-none">
+            24h Change<span className="w-[16px]"></span>
+          </div>
+        </th>
+      </tr>
+    </thead>
   );
 }
